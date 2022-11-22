@@ -3,10 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FeedsComponent } from './feeds/feeds.component';
+import { MemesComponent } from './memes/memes.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FeedsComponent,
+    MemesComponent
   ],
   imports: [
     BrowserModule,
