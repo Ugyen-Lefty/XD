@@ -1,14 +1,23 @@
-<div class="swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide">
-      <app-feeds></app-feeds>
-    </div>
-    <div class="swiper-slide">
-      <app-memes></app-memes>
-    </div>
-  </div>
-  <!-- <div class="swiper-pagination"></div> -->
-  <!-- <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div> -->
-  <div class="swiper-scrollbar"></div>
+<swiper [config]="config" *ngIf="!isLoading" (slideChange)="showMore = false">
+  <ng-container *ngFor="let meme of memes">
+    <ng-template swiperSlide class="slide"
+      *ngIf="meme?.data?.url.includes('png') || meme?.data?.url.includes('jpg') || meme?.data?.url.includes('jpeg') || meme?.data?.url.includes('webp') || meme?.data?.url.includes('gif') || meme?.data?.url.includes('gifv')">
+      <div fxLayout="column" fxLayoutAlign="center center" style="height: 85%; padding: 10px;">
+        <div>
+          <img
+            *ngIf="meme?.data?.url.includes('png') || meme?.data?.url.includes('jpg') || meme?.data?.url.includes('jpeg') || meme?.data?.url.includes('webp') || meme?.data?.url.includes('gif') || meme?.data?.url.includes('gifv')"
+            [src]="meme?.data?.url" class="meme-image">
+        </div>
+      </div>
+      <div style="height: 15%; background-color: black; opacity: 0.5; padding: 20px;" (click)="showMore = !showMore">
+        <h1 class="description" [ngClass]="showMore ? 'show' : 'description' ">
+          {{ meme?.data?.title }}
+        </h1>
+        <p style="color: white;">{{ meme?.data?.author }}</p>
+      </div>
+    </ng-template>
+  </ng-container>
+</swiper>
+<div class="loader" *ngIf="isLoading">
+  <app-loader></app-loader>
 </div>
